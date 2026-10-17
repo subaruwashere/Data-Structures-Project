@@ -37,9 +37,40 @@ class HospitalSystem{
 		}
 		// values initialized
 		
-		
+		//1. Add Patient
+		void addPatient(){
+			int id, age;
+			string name, disease, contact_number;
+			
+			cout<<"-----Add New Patient-----\n";
+			cout<<"Enter Patient ID: ";
+			while(!(cin >> id)){
+				cout<<"Invalid Input! Enter Numeric ID: ";
+				cin.clear();				//prevents errors
+				cin.ignore(10000, '\n');		//clears buffer
+			}
+			
+			cout<<"Enter Name: ";
+			cin.ignore();
+			getline(cin, name); 	//to read whole input including spaces
+			
+			cout<<"Enter Age: ";
+			while(!(cin >> age || age < 1)){
+				cout<<"Invalid Age! Enter a Valid Age: ";
+				cin.clear();
+				cin.ignore(10000, '\n');	//clear buffer
+			}
+			
+			cout<<"Enter Disease/Condition: ";
+			cin.ignore();
+			getline(cin, disease); //read full sentence
+			
+			cout<<"Enter Contact Number: ";
+			getline(cin, contact_number);
+		}
 };
 int main(){
+	HospitalSystem system;
 	int choice;
 	do{
 		cout<<"\n===================================\n";
@@ -66,6 +97,7 @@ int main(){
 		
 		switch(choice){
 			case 1:
+				system.addPatient();
 				break;
 			case 2:
 				break;
