@@ -37,7 +37,7 @@ class HospitalSystem{
 		}
 		// values initialized
 		
-		//1. Add Patient
+		//1. Add Patient details
 		void addPatient(){
 			int id, age;
 			string name, disease, contact_number;
@@ -50,16 +50,22 @@ class HospitalSystem{
 				cin.ignore(10000, '\n');		//clears buffer
 			}
 			
+			// Check if ID already exists
+        	if (searchPatientByID(id, false) != nullptr) {
+        	    cout << "Error: Patient with ID " << id << " already exists!\n";
+        	    return;
+        	}
+			
 			cout<<"Enter Name: ";
 			cin.ignore();
 			getline(cin, name); 	//to read whole input including spaces
 			
-			cout<<"Enter Age: ";
-			while(!(cin >> age || age < 1)){
-				cout<<"Invalid Age! Enter a Valid Age: ";
-				cin.clear();
-				cin.ignore(10000, '\n');	//clear buffer
-			}
+			cout<<"Enter Age:";
+			while (!(cin >> age) || age <= 0) {
+            	cout << "Invalid age. Enter a valid age: ";
+            	cin.clear();
+            	cin.ignore(10000, '\n');
+        	}
 			
 			cout<<"Enter Disease/Condition: ";
 			cin.ignore();
@@ -109,6 +115,7 @@ class HospitalSystem{
 			patientCount--; //decrease patient count by 1
 			cout<<"Patient is served and removed from the queue!";
 		}
+		//----------------------------------------------------------------------------
 		
 		//helping function for searching by id (for internal use)
 		Patient* searchPatientByID(int id, bool display = true){
@@ -132,7 +139,9 @@ class HospitalSystem{
 			return NULL;
 		}
 		
-		//3. Search Patient
+		//----------------------------------------------------------------------------
+		
+		//3. Search Patient by ID
 		void searchPatient(){
 			int id;
 			cout<<"Enter Patient ID to search: ";
@@ -140,7 +149,9 @@ class HospitalSystem{
 			searchPatientByID(id, true);
 		}
 		
-		//4. Update Patient
+		//----------------------------------------------------------------------------
+		
+		//4. Update Patient record by ID
 		void updatePatient(){
 			int id;
 			cout<<"Enter Patient ID to update record: ";
@@ -171,30 +182,7 @@ class HospitalSystem{
 			cout<<"Patient Details Updated Successfully!\n";
 		}
 		
-		//6. Display Waiting Patients (queue traversak)
-		void dispWaitingPatients(){
-			if(front == NULL){
-				cout<<"No patients in the waiting queue\n";
-				return;
-			}
-			
-			cout<<"=================================\n";
-			cout<<"   Patients Waiting List\n";
-			cout<<"=================================\n";
-			
-			Patient* current = front;
-			int pos = 1;
-			while(current!=NULL){
-				cout<<pos<<". ID: "<<current->patientId 
-				<<" | Name: "<<current->name
-				<<" | Age: "<<current->age
-				<<" | Disease: "<<current->disease
-				<<" | Contact: "<<current->contact_number<<endl;
-				current = current->next;
-				pos++;
-			}
-			cout<<"----------------------------------------------\n";
-		}
+		//----------------------------------------------------------------------------
 		
 		// 5. Remove Patient (Arbitrary Removal from Queue/List)
     	void removePatient() {
@@ -245,11 +233,44 @@ class HospitalSystem{
 	        patientCount--;
 	        cout << "Patient removed successfully.\n";
 	    }
+	    
+	    //----------------------------------------------------------------------------
+		
+		//6. Display Waiting Patients (queue traversal)
+		void dispWaitingPatients(){
+			if(front == NULL){
+				cout<<"No patients in the waiting queue\n";
+				return;
+			}
+			
+			cout<<"=================================\n";
+			cout<<"   Patients Waiting List\n";
+			cout<<"=================================\n";
+			
+			Patient* current = front;
+			int pos = 1;
+			while(current!=NULL){
+				cout<<pos<<". ID: "<<current->patientId 
+				<<" | Name: "<<current->name
+				<<" | Age: "<<current->age
+				<<" | Disease: "<<current->disease
+				<<" | Contact: "<<current->contact_number<<endl;
+				current = current->next;
+				pos++;
+			}
+			cout<<"----------------------------------------------\n";
+		}
+		
+		//----------------------------------------------------------------------------
+		
+		
 			
 		//7. Patient Count
 		void countPatients(){
 			cout<<"Total Number of patients currently in waiting: "<<patientCount<<endl;
 		}
+		
+		//----------------------------------------------------------------------------
 };
 int main(){
 	HospitalSystem system;
