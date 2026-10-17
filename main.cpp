@@ -170,6 +170,11 @@ class HospitalSystem{
 			
 			cout<<"Patient Details Updated Successfully!\n";
 		}
+		
+		//7. Patient Count
+		void countPatients(){
+			cout<<"Total Number of patients currently in waiting: "<<patientCount<<endl;
+		}
 };
 int main(){
 	HospitalSystem system;
@@ -215,6 +220,7 @@ int main(){
 			case 6:
 				break;
 			case 7:
+				system.countPatients();
 				break;
 			case 8:
 				cout<<"Exiting Program.....\n";
