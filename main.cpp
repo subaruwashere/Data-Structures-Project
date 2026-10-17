@@ -139,6 +139,37 @@ class HospitalSystem{
 			cin>>id;
 			searchPatientByID(id, true);
 		}
+		
+		//4. Update Patient
+		void updatePatient(){
+			int id;
+			cout<<"Enter Patient ID to update record: ";
+			cin >> id;
+			
+			Patient* patient = searchPatientByID(id, false);
+			if(patient == NULL){
+				cout<<"Patient not Found for Updating...\n";
+				return;
+			}
+			
+			cout<<"Updating Details for "<<patient->name<<": \n";
+			cout<<"Enter New Name: ";
+			cin.ignore(); 
+			getline(cin, patient->name);
+			
+			cout<<"Enter New Age: ";
+			cin>>patient->age;
+			
+			cout<<"Enter New Disease: ";
+			cin.ignore();
+			getline(cin, patient->disease);
+			
+			cout<<"Enter New Contact Info: ";
+			cin.ignore();
+			getline(cin, patient->contact_number);
+			
+			cout<<"Patient Details Updated Successfully!\n";
+		}
 };
 int main(){
 	HospitalSystem system;
@@ -177,6 +208,7 @@ int main(){
 				system.searchPatient();
 				break;
 			case 4:
+				system.updatePatient();
 				break;
 			case 5:
 				break;
