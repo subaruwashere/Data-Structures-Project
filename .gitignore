@@ -1,0 +1,13 @@
+# Compiled C++ files
+*.exe
+*.out
+*.o
+*.obj
+
+# Dev-C++ / Visual Studio / IDE specific folders & files
+*.layout
+*.aps
+.vs/
+x64/
+Debug/
+Release/
