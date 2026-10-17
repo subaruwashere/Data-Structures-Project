@@ -67,7 +67,22 @@ class HospitalSystem{
 			
 			cout<<"Enter Contact Number: ";
 			getline(cin, contact_number);
-		}
+		
+		
+			//add to queue
+			Patient* newPatient = new Patient(id, name, age, disease, contact_number);
+			
+			if(rear == NULL){
+				front = rear = newPatient;
+			}
+			else{
+				rear->next = newPatient;
+				rear = newPatient;
+			}
+			patientCount++; 	//increase count of patients by 1
+			
+			cout<<"Patient Added to the waiting queue successfully!\n\n";
+		}	
 };
 int main(){
 	HospitalSystem system;
