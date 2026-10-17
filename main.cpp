@@ -171,6 +171,31 @@ class HospitalSystem{
 			cout<<"Patient Details Updated Successfully!\n";
 		}
 		
+		//6. Display Waiting Patients (queue traversak)
+		void dispWaitingPatients(){
+			if(front == NULL){
+				cout<<"No patients in the waiting queue\n";
+				return;
+			}
+			
+			cout<<"=================================\n";
+			cout<<"   Patients Waiting List\n";
+			cout<<"=================================\n";
+			
+			Patient* current = front;
+			int pos = 1;
+			while(current!=NULL){
+				cout<<pos<<". ID: "<<current->patientId 
+				<<" | Name: "<<current->name
+				<<" | Age: "<<current->age
+				<<" | Disease: "<<current->disease
+				<<" | Contact: "<<current->contact_number<<endl;
+				current = current->next;
+				pos++;
+			}
+			cout<<"----------------------------------------------\n";
+		}
+		
 		//7. Patient Count
 		void countPatients(){
 			cout<<"Total Number of patients currently in waiting: "<<patientCount<<endl;
@@ -218,6 +243,7 @@ int main(){
 			case 5:
 				break;
 			case 6:
+				system.dispWaitingPatients();
 				break;
 			case 7:
 				system.countPatients();
