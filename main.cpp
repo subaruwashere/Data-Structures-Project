@@ -21,6 +21,24 @@ class Patient{														//=====Afraz Haider 72935=====
 			next = NULL;
 		}
 };
+
+class HospitalSystem{
+	private:
+		Patient* front;
+		Patient* rear;
+		int patientCount;
+	
+	public:
+		//Constructor
+		HospitalSystem(){
+			front = NULL;
+			rear = NULL;
+			patientCount = 0;
+		}
+		// values initialized
+		
+		
+};
 int main(){
 	int choice;
 	do{
@@ -44,6 +62,26 @@ int main(){
 			cin.clear();	//to prevent error by wrong input
 			cin.ignore(1000, '\n');	//clears buffer
 			continue;
+		}
+		
+		switch(choice){
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
+			case 8:
+				cout<<"Exiting Program.....\n";
+				break;
 		}
 	}while(choice!= 8);
 	
