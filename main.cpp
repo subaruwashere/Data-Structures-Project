@@ -196,6 +196,56 @@ class HospitalSystem{
 			cout<<"----------------------------------------------\n";
 		}
 		
+		// 5. Remove Patient (Arbitrary Removal from Queue/List)
+    	void removePatient() {
+    	    int id;
+    	    cout << "\nEnter Patient ID to remove: ";
+    	    cin >> id;
+	
+	        if (front == nullptr) {
+	            cout << "The queue is empty.\n";
+	            return;
+	        }
+	
+	        Patient* current = front;
+	        Patient* prev = nullptr;
+	
+	        // If the patient to remove is at the front (Dequeue behavior)
+	        if (current->patientId == id) {
+	            front = front->next;
+	            if (front == nullptr) {
+	                rear = nullptr;
+	            }
+	            delete current;
+	            patientCount--;
+	            cout << "Patient removed successfully.\n";
+	            return;
+        	}
+
+        	// Search in the rest of the queue
+        	while (current != nullptr && current->patientId != id) {
+        	    prev = current;
+        	    current = current->next;
+        	}
+	
+	        if (current == nullptr) {
+	            cout << "Patient with ID " << id << " not found.\n";
+	            return;
+	        }
+	
+	        // Bypass the node
+	        prev->next = current->next;
+	
+	        // If deleted node was the rear, update rear
+	        if (current == rear) {
+	            rear = prev;
+	        }
+	
+	        delete current;
+	        patientCount--;
+	        cout << "Patient removed successfully.\n";
+	    }
+			
 		//7. Patient Count
 		void countPatients(){
 			cout<<"Total Number of patients currently in waiting: "<<patientCount<<endl;
@@ -241,6 +291,7 @@ int main(){
 				system.updatePatient();
 				break;
 			case 5:
+				system.removePatient();
 				break;
 			case 6:
 				system.dispWaitingPatients();
