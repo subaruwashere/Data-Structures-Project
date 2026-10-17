@@ -108,7 +108,37 @@ class HospitalSystem{
 			delete temp;
 			patientCount--; //decrease patient count by 1
 			cout<<"Patient is served and removed from the queue!";
-		}	
+		}
+		
+		//helping function for searching by id (for internal use)
+		Patient* searchPatientByID(int id, bool display = true){
+			Patient* current = front;
+			while( current != NULL){
+				if(current->patientId == id){
+					if(display){
+						cout<<"-----Patient Found-----\n";
+						cout<<"ID:      "<<current->patientId<<endl;
+						cout<<"Name:    "<<current->name<<endl;
+						cout<<"Age:     "<<current->age<<endl;
+						cout<<"Disease: "<<current->disease<<endl;
+						cout<<"Contact: "<<current->contact_number<<endl;
+					}
+					return current;
+				}
+				current = current->next;
+			}
+			if(display)
+				cout<<"Patient Not Found! Try a different ID.\n";
+			return NULL;
+		}
+		
+		//3. Search Patient
+		void searchPatient(){
+			int id;
+			cout<<"Enter Patient ID to search: ";
+			cin>>id;
+			searchPatientByID(id, true);
+		}
 };
 int main(){
 	HospitalSystem system;
@@ -144,6 +174,7 @@ int main(){
 				system.servePatient();
 				break;
 			case 3:
+				system.searchPatient();
 				break;
 			case 4:
 				break;
