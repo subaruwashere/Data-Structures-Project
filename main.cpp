@@ -82,6 +82,32 @@ class HospitalSystem{
 			patientCount++; 	//increase count of patients by 1
 			
 			cout<<"Patient Added to the waiting queue successfully!\n\n";
+		}
+		//----------------------------------------------------------------------------
+		
+		//2. Serve Patient
+		void servePatient(){
+			if(front == NULL){
+				cout<<"No patients in the waiting queue\n";
+				return;
+			}
+			Patient* temp = front;
+			cout<<"-----Serving Patient-----\n";
+			cout<<"ID: "<<temp->patientId<<"\n";
+			cout<<"Name: "<<temp->name<<"\n";
+			cout<<"Age: "<<temp->age<<"\n";
+			cout<<"Disease: "<<temp->disease<<"\n";
+			cout<<"---------------------------\n";
+			
+			front = front->next;
+			
+			//if front becomes null, rear must also be null
+			if(front == NULL){
+				rear = NULL;
+			}
+			delete temp;
+			patientCount--; //decrease patient count by 1
+			cout<<"Patient is served and removed from the queue!";
 		}	
 };
 int main(){
@@ -115,6 +141,7 @@ int main(){
 				system.addPatient();
 				break;
 			case 2:
+				system.servePatient();
 				break;
 			case 3:
 				break;
